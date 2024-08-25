@@ -1,0 +1,11 @@
+Hello {{ .FirstName }},
+
+Welcome to the The Open Lane platform - you can now log in to your account at https://console.theopenlane.io.
+
+What Next?
+
+We've created a personal Organization just for you to help you get started - you can create additional Organizations for your businesses, or just jump right in to see all the amazing features we've cooked up for you.  Check out the starter guide https://docs.theopenlane.io/getting-started for more information, or our examples https://docs.theopenlane.io/examples for ideas and inspiration.
+
+If you have any questions, please reach out to us at support@theopenlane.io.
+
+The Open Lane Team
