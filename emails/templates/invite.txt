@@ -1,0 +1,13 @@
+Join your team on The Open Lane
+
+{{ .InviterName }} has invited you to use The Open Lane with them, in an Organization called {{ .OrgName }} with role of {{ .Role }}
+
+Accept the invitation by clicking this link.
+
+{{ .InviteURL }}
+
+If you have any questions, please contact support@theopenlane.io
+
+Thank you,
+
+ The Open Lane Team
