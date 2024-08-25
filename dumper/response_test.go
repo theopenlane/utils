@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	// TODO: look into updating the echox dependency
-	echo "github.com/datumforge/echox"
+	echo "github.com/theopenlane/echox"
 )
 
 func TestDumper(t *testing.T) {

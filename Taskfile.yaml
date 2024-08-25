@@ -1,7 +1,5 @@
 version: "3"
 
-env:
-
 tasks:
   default:
     silent: true
@@ -41,3 +39,10 @@ tasks:
       - task: go:fmt
       - task: go:lint
       - task: go:test
+
+  precommit-full:
+    desc: Lint the project against all files
+    cmds:
+      - pre-commit install && pre-commit install-hooks
+      - pre-commit autoupdate
+      - pre-commit run --show-diff-on-failure --color=always --all-files

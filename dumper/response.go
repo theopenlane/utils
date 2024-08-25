@@ -8,7 +8,7 @@ import (
 	"net"
 	"net/http"
 
-	echo "github.com/datumforge/echox"
+	echo "github.com/theopenlane/echox"
 )
 
 // Dumper is a response writer that captures the response body

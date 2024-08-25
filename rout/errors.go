@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	// TODO:  look at switiching out echo for a more lightweight package
-	echo "github.com/datumforge/echox"
+	echo "github.com/theopenlane/echox"
 )
 
 // ErrorCode is returned along side error messages for better error handling
