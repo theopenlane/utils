@@ -42,6 +42,7 @@ func TestNew(t *testing.T) {
 			require.False(t, ulidlib.IsZero(uid))
 		}()
 	}
+
 	wg.Wait()
 }
 
@@ -64,6 +65,7 @@ func TestFromTime(t *testing.T) {
 			vals.Store(uid, struct{}{})
 		}()
 	}
+
 	wg.Wait()
 
 	nunique := 0
@@ -72,6 +74,7 @@ func TestFromTime(t *testing.T) {
 		nunique++
 		return true
 	})
+
 	require.Equal(t, 100, nunique)
 }
 

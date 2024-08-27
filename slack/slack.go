@@ -91,7 +91,7 @@ func (c *Client) Post(ctx context.Context, payload *Payload) error {
 			return err
 		}
 
-		return fmt.Errorf("slack: %s failed with %d %s", payloadJSON, resp.StatusCode, string(body))
+		return fmt.Errorf("slack: %s failed with %d %s", payloadJSON, resp.StatusCode, string(body)) //nolint:err113
 	}
 
 	return nil
