@@ -65,12 +65,12 @@ type ResetSuccessData struct {
 
 // Email subject lines
 const (
-	WelcomeRE              = "Welcome to TheOpenLane!"
-	VerifyEmailRE          = "Please verify your email address to login to TheOpenLane"
-	InviteRE               = "Join Your Teammate %s on TheOpenLane!"
-	PasswordResetRequestRE = "TheOpenLane Password Reset - Action Required"
-	PasswordResetSuccessRE = "TheOpenLane Password Reset Confirmation"
-	InviteBeenAccepted     = "You've been added to an Organization on TheOpenLane"
+	WelcomeRE              = "Welcome to openlane!"
+	VerifyEmailRE          = "Please verify your email address to login to openlane"
+	InviteRE               = "Join Your Teammate %s on openlane!"
+	PasswordResetRequestRE = "Openlane Password Reset - Action Required"
+	PasswordResetSuccessRE = "Openlane Password Reset Confirmation"
+	InviteBeenAccepted     = "You've been added to an Organization on openlane"
 	Subscribed             = "You've been subscribed to %s"
 )
 
