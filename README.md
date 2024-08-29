@@ -1,3 +1,3 @@
 # utils
 
-Utilities for working within the OpenLane ecosystem
+Utilities for working within the openlane ecosystem
