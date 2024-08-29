@@ -17,4 +17,4 @@ identifier-leading-digits = false
 locale = "en"
 extend-ignore-identifiers-re = []
 extend-ignore-words-re = ["(?i)requestor","(?i)encrypter","(?i)seeked"]
-extend-ignore-re = ["#\\s*spellchecker:off\\s*\\n.*\\n\\s*#\\s*spellchecker:on"]
+extend-ignore-re = ["(?Rm)^.*//\\s*spellchecker:disable-line$"]
