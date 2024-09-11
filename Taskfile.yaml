@@ -12,6 +12,11 @@ tasks:
     cmds:
       - golangci-lint run --config=.golangci.yaml --verbose --fast --fix
 
+  go:fmt:
+    desc: format all go code
+    cmds:
+      - go fmt ./...
+
   go:test:
     desc: runs and outputs results of created go tests
     aliases: ['go:test:psql', 'test:psql']
@@ -20,20 +25,30 @@ tasks:
     cmds:
       - go test -v ./...
 
-  go:fmt:
-    desc: format all go code
+  go:test:cover:
+    desc: runs and outputs results of created go tests with coverage
+    aliases: [cover]
+    env:
+      TEST_DB_URL: "docker://postgres:16-alpine"
     cmds:
-      - go fmt ./...
+      - go test -v ./... -coverprofile=coverage.out
+
+  go:test:cover:out:
+    desc: runs and outputs results of created go tests with coverage
+    aliases: [cover]
+    cmds:
+      - task: go:test:cover
+      - go tool cover -html=coverage.out
 
   go:tidy:
-    desc: Runs go mod tidy on the backend
+    desc: runs go mod tidy on the backend
     aliases: [tidy]
     cmds:
       - go mod tidy
 
   go:all:
     aliases: [go]
-    desc: Runs all go test and lint related tasks
+    desc: runs all go test and lint related tasks
     cmds:
       - task: go:tidy
       - task: go:fmt
