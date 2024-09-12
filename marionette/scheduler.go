@@ -1,11 +1,11 @@
 package marionette
 
 import (
-	"log/slog"
-	"os"
 	"sort"
 	"sync"
 	"time"
+
+	"github.com/rs/zerolog/log"
 )
 
 // Scheduler manages a list of future tasks and on or after the time that they are
@@ -22,7 +22,6 @@ import (
 // second, preferring longer sleeps and interrupts instead.
 type Scheduler struct {
 	sync.RWMutex
-	logger  *slog.Logger
 	tasks   Futures
 	out     chan<- Task
 	add     chan *Future
@@ -35,18 +34,13 @@ type Scheduler struct {
 // that the task should be executed as soon as possible. The scheduler makes no
 // guarantees about exact timing of tasks scheduled except that the task will not be
 // sent on the out channel before its scheduled time.
-func NewScheduler(out chan<- Task, logger *slog.Logger) *Scheduler {
-	if logger == nil {
-		logger = slog.New(slog.NewJSONHandler(os.Stdout, nil))
-	}
-
+func NewScheduler(out chan<- Task) *Scheduler {
 	return &Scheduler{
 		out:     out,
 		add:     make(chan *Future, 1),
 		stop:    make(chan struct{}),
 		tasks:   make(Futures, 0, minFuturesCapacity),
 		running: false,
-		logger:  logger,
 	}
 }
 
@@ -102,7 +96,7 @@ func (s *Scheduler) Start(wg *sync.WaitGroup) {
 }
 
 func (s *Scheduler) run() {
-	s.logger.Info("scheduler running")
+	log.Info().Msg("scheduler running")
 
 	// Schedule any tasks before or equal to now, ensuring that the next task in the
 	// queue is in the future so that we can sleep until that timestamp.
@@ -139,7 +133,7 @@ func (s *Scheduler) run() {
 
 		case <-s.stop:
 			timer.Stop()
-			s.logger.Info("scheduler stopped")
+			log.Info().Msg("scheduler stopped")
 
 			return
 		}

@@ -13,6 +13,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/ory/dockertest v3.3.5+incompatible
 	github.com/redis/go-redis/v9 v9.6.1
+	github.com/rs/zerolog v1.33.0
 	github.com/sendgrid/rest v2.6.9+incompatible
 	github.com/sendgrid/sendgrid-go v3.16.0+incompatible
 	github.com/stretchr/testify v1.9.0
@@ -40,6 +41,7 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gotestyourself/gotestyourself v2.2.0+incompatible // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect

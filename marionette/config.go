@@ -1,11 +1,8 @@
 package marionette
 
-import "log/slog"
-
 // Config configures the marionette task manager so that different processes can utilize
 // different asynchronous task processing resources depending on process compute constraints
 type Config struct {
-	Logger     *slog.Logger
 	Workers    int    `default:"4" desc:"the number of workers to process tasks asynchronously"`
 	QueueSize  int    `default:"64" desc:"the number of async tasks to buffer in the queue before blocking"`
 	ServerName string `default:"marionette" desc:"used to describe the marionette service in the log"`

@@ -7,6 +7,7 @@ import (
 
 	"github.com/cenkalti/backoff/v4"
 	"github.com/oklog/ulid/v2"
+	"github.com/rs/zerolog/log"
 )
 
 // Task workers in the task manager handle Tasks which can hold state and other information
@@ -86,10 +87,11 @@ func (h *TaskHandler) Exec() {
 	var err error
 	if err = h.task.Do(ctx); err == nil {
 		// Success!
-		h.parent.logger.Debug("success executing task",
-			"task_id", h.id.String(),
-			"duration", time.Since(h.queuedAt),
-			"attempts", h.attempts+1)
+		log.Debug().
+			Str("task_id", h.id.String()).
+			Dur("duration", time.Since(h.queuedAt)).
+			Int("attempts", h.attempts+1).
+			Msg("success executing task")
 
 		return
 	}
@@ -102,7 +104,7 @@ func (h *TaskHandler) Exec() {
 	// Check if we have retries left
 	if h.attempts <= h.retries {
 		// Schedule the retry be added back to the queue
-		h.parent.logger.Debug("warn! retrying the task", "error", err)
+		log.Debug().Err(err).Msg("retrying the task")
 
 		h.parent.scheduler.Delay(h.backoff.NextBackOff(), h) //nolint:errcheck
 
@@ -110,7 +112,7 @@ func (h *TaskHandler) Exec() {
 	}
 
 	// At this point we've exhausted all possible retries, so log the error.
-	h.parent.logger.Error("everything has failed")
+	log.Error().Err(err).Msg("exhausted all retries for task")
 }
 
 // Do TaskHandler implements Task so that it can be scheduled, but it should never be
