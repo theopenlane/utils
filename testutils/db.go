@@ -10,10 +10,10 @@ import (
 
 	"entgo.io/ent/dialect"
 	_ "github.com/lib/pq"
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/ory/dockertest"
 	"github.com/ory/dockertest/docker"
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
+	_ "modernc.org/sqlite"
 )
 
 type TestFixture struct {
