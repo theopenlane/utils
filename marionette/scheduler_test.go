@@ -2,9 +2,7 @@ package marionette_test
 
 import (
 	"context"
-	"log/slog"
 	"math/rand"
-	"os"
 	"slices"
 	"sort"
 	"sync"
@@ -16,8 +14,6 @@ import (
 
 	. "github.com/theopenlane/utils/marionette"
 )
-
-var discard = slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{}))
 
 func TestScheduler(t *testing.T) {
 	if testing.Short() {
@@ -46,7 +42,7 @@ func TestScheduler(t *testing.T) {
 	}()
 
 	// Create a scheduler
-	scheduler := NewScheduler(out, discard)
+	scheduler := NewScheduler(out)
 	require.False(t, scheduler.IsRunning(), "expected the scheduler to not be running when constructed")
 
 	// Schedule a bunch of tasks before running the scheduler including tasks in the
@@ -94,7 +90,7 @@ func TestScheduler(t *testing.T) {
 func TestSchedulerStop(t *testing.T) {
 	var wg sync.WaitGroup
 
-	scheduler := NewScheduler(nil, discard)
+	scheduler := NewScheduler(nil)
 	scheduler.Start(&wg)
 
 	// calling scheduler start multiple times should be a no-op

@@ -1,11 +1,10 @@
 package marionette
 
 import (
-	"os"
 	"sync"
 	"time"
 
-	"log/slog"
+	"github.com/rs/zerolog/log"
 )
 
 // TaskManager execute Tasks using a fixed number of workers that operate in their own
@@ -14,7 +13,6 @@ import (
 type TaskManager struct {
 	sync.RWMutex
 	conf      Config
-	logger    *slog.Logger
 	scheduler *Scheduler
 	wg        *sync.WaitGroup
 	add       chan Task
@@ -33,11 +31,7 @@ func New(conf Config) *TaskManager {
 
 	add := make(chan Task, conf.QueueSize)
 
-	scheduler := NewScheduler(add, conf.Logger)
-
-	if conf.Logger == nil {
-		conf.Logger = slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{}))
-	}
+	scheduler := NewScheduler(add)
 
 	return &TaskManager{
 		conf:      conf,
@@ -46,7 +40,6 @@ func New(conf Config) *TaskManager {
 		add:       add,
 		stop:      make(chan struct{}, 1),
 		running:   false,
-		logger:    conf.Logger,
 	}
 }
 
@@ -58,7 +51,7 @@ func (tm *TaskManager) Queue(task Task, opts ...Option) error {
 	defer tm.RUnlock()
 
 	if !tm.running {
-		tm.logger.Warn(ErrTaskManagerStopped.Error())
+		log.Warn().Err(ErrTaskManagerStopped).Msg("task manager stopped")
 		return ErrTaskManagerStopped
 	}
 
@@ -97,7 +90,7 @@ func (tm *TaskManager) run() {
 	tm.wg.Add(1)
 	defer tm.wg.Done()
 
-	tm.logger.Info("task manager running")
+	log.Info().Msg("task manager running")
 
 	tm.queue = make(chan *TaskHandler, tm.conf.QueueSize)
 
@@ -117,7 +110,7 @@ func (tm *TaskManager) run() {
 
 		case <-tm.stop:
 			close(tm.queue)
-			tm.logger.Info("task manager stopped")
+			log.Info().Msg("task manager stopped")
 
 			return
 		}

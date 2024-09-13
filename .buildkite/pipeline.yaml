@@ -1,9 +1,8 @@
 env:
   APP_NAME: ${BUILDKITE_PIPELINE_SLUG}
-  IMAGE_REPO: ghcr.io/theopenlane/${APP_NAME}
   SONAR_HOST: "https://sonarcloud.io"
 steps:
-  - group: ":test_tube: tests"
+  - group: ":test_tube: Tests"
     key: "tests"
     steps:
       - label: ":golangci-lint: lint :lint-roller:"
@@ -20,18 +19,19 @@ steps:
         cancel_on_build_failing: true
         plugins:
           - docker#v5.11.0:
-              image: golang:1.23.0
+              image: golang:1.23.1
+              always-pull: true
               command: ["go", "test", "-coverprofile=coverage.out", "./..."]
         artifact_paths: ["coverage.out"]
   - group: ":closed_lock_with_key: Security Checks"
-    depends_on: "go_test"
+    depends_on: "tests"
     key: "security"
     steps:
       - label: ":closed_lock_with_key: gosec"
         key: "gosec"
         plugins:
           - docker#v5.11.0:
-              image: "registry.hub.docker.com/securego/gosec:2.20.0"
+              image: "securego/gosec:2.20.0"
               command: ["-no-fail", "-exclude-generated", "-fmt sonarqube", "-out", "results.txt", "./..."]
               environment:
                 - "GOTOOLCHAIN=auto"
@@ -47,7 +47,7 @@ steps:
               download: "coverage.out"
               step: "go_test"
           - docker#v5.11.0:
-              image: "sonarsource/sonar-scanner-cli:5"
+              image: "sonarsource/sonar-scanner-cli:11"
               environment:
                 - "SONAR_TOKEN"
                 - "SONAR_HOST_URL=$SONAR_HOST"
@@ -63,7 +63,7 @@ steps:
               download: coverage.out
               step: "go_test"
           - docker#v5.11.0:
-              image: "sonarsource/sonar-scanner-cli:5"
+              image: "sonarsource/sonar-scanner-cli:11"
               environment:
                 - "SONAR_TOKEN"
                 - "SONAR_HOST_URL=$SONAR_HOST"
