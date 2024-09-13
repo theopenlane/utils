@@ -6,7 +6,6 @@ require (
 	entgo.io/ent v0.14.1
 	github.com/brianvoe/gofakeit/v7 v7.0.4
 	github.com/cenkalti/backoff/v4 v4.3.0
-	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/lib/pq v1.10.9
 	github.com/mattn/go-sqlite3 v1.14.23
 	github.com/oklog/ulid/v2 v2.1.0
