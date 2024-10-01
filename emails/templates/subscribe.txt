@@ -1,8 +1,0 @@
-Thank you for subscribing to {{ .OrgName }} - in order to confirm the subscription of future emails, please verify your email address by clicking the button below, or copy and paste the linked URL into your browser:
-
-{{ .VerifySubscriberURL }}
-
-If you are having trouble verifying your email address, please contact us at support@theopenlane.io.
-
-Thank you,
-The The Open Lane Team
