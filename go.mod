@@ -7,7 +7,7 @@ require (
 	github.com/brianvoe/gofakeit/v7 v7.0.4
 	github.com/cenkalti/backoff/v4 v4.3.0
 	github.com/lib/pq v1.10.9
-	github.com/mattn/go-sqlite3 v1.14.23
+	github.com/mattn/go-sqlite3 v1.14.24
 	github.com/oklog/ulid/v2 v2.1.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/ory/dockertest v3.3.5+incompatible
