@@ -16,6 +16,11 @@ import (
 	_ "modernc.org/sqlite"
 )
 
+const (
+	defaultMaxConn       = 100
+	defaultExpiryMinutes = 5
+)
+
 // Option is a functional option for configuring the DBConfig
 type Option func(*DBConfig)
 
@@ -157,8 +162,8 @@ func getTestDB(u string, expiry time.Duration, maxConn int) (*TestFixture, error
 // GetTestURI returns the dialect, connection string and if used a testcontainer for database connectivity in tests
 func GetTestURI(opts ...Option) *TestFixture {
 	config := &DBConfig{
-		maxConn: 100,                            // default to 100
-		expiry:  time.Duration(5) * time.Minute, // default to 5 minutes
+		maxConn: defaultMaxConn,                                    // default to 100
+		expiry:  time.Duration(defaultExpiryMinutes) * time.Minute, // default to 5 minutes
 	}
 
 	for _, opt := range opts {
