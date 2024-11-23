@@ -1,6 +1,6 @@
 module github.com/theopenlane/utils
 
-go 1.23.1
+go 1.23.3
 
 require (
 	entgo.io/ent v0.14.1
