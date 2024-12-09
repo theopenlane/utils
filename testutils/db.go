@@ -12,8 +12,6 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/ory/dockertest"
 	"github.com/ory/dockertest/docker"
-	_ "github.com/tursodatabase/libsql-client-go/libsql"
-	_ "modernc.org/sqlite"
 )
 
 const (
