@@ -12,6 +12,12 @@ tasks:
     cmds:
       - golangci-lint run --config=.golangci.yaml --verbose --fast --fix
 
+  go:lint:ci:
+    desc: runs golangci-lint, the most annoying opinionated linter ever, for CI
+    ## do not use --fast or --fix in CI
+    cmds:
+      - golangci-lint run --config=.golangci.yaml --verbose
+      
   go:fmt:
     desc: format all go code
     cmds:
