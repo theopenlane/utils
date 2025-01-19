@@ -5,7 +5,7 @@ go 1.23.4
 require (
 	entgo.io/ent v0.14.1
 	github.com/brianvoe/gofakeit/v7 v7.1.2
-	github.com/cenkalti/backoff/v5 v5.0.0
+	github.com/cenkalti/backoff/v5 v5.0.1
 	github.com/lib/pq v1.10.9
 	github.com/mattn/go-sqlite3 v1.14.24
 	github.com/oklog/ulid/v2 v2.1.0
