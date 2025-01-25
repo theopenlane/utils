@@ -8,9 +8,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/zalando/go-keyring"
 )
 
 func TestKeying(t *testing.T) {
+	keyring.MockInit()
+
 	service := "test-service-1"
 	account := "test-account-1"
 	passwd := "test-password"
