@@ -3,7 +3,7 @@ module github.com/theopenlane/utils
 go 1.23.5
 
 require (
-	entgo.io/ent v0.14.1
+	entgo.io/ent v0.14.3
 	github.com/brianvoe/gofakeit/v7 v7.2.1
 	github.com/cenkalti/backoff/v5 v5.0.2
 	github.com/lib/pq v1.10.9
