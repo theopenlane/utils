@@ -20,6 +20,7 @@ var (
 	baseURL, _ = url.Parse("https://www.gravatar.com")
 )
 
+// New returns a Gravatar image URL for the given email address
 func New(email string, opts *Options) string {
 	if opts == nil {
 		opts = &Options{Size: defaultSize, DefaultImage: defaultImage, Rating: defaultRating}
