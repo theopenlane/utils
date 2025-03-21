@@ -39,3 +39,4 @@ issues:
   exclude-dirs:
     - totp/testing/*
   exclude-files:
+    []

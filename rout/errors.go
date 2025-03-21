@@ -92,6 +92,7 @@ type Reply struct {
 	Unverified bool      `json:"unverified,omitempty" yaml:"unverified,omitempty"`
 }
 
+// Response is a generic response object that can be used to return data or errors
 type Response struct {
 	Success bool    `json:"success"`
 	Message string  `json:"message"`
@@ -99,6 +100,7 @@ type Response struct {
 	Errors  []error `json:"errors,omitempty"`
 }
 
+// MarshalJSON marshals the response object to JSON
 func (res Response) MarshalJSON() ([]byte, error) {
 	var errors []string
 	for _, err := range res.Errors {
@@ -108,10 +110,12 @@ func (res Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(map[string]any{"data": res.Data, "errors": errors})
 }
 
+// GraphQLRequest is a request object for GraphQL queries
 type GraphQLRequest struct {
 	Query string `json:"query"`
 }
 
+// GraphQLResponse is a response object for GraphQL queries
 type GraphQLResponse struct {
 	Data   any     `json:"data"`
 	Errors []error `json:"errors,omitempty"`
@@ -125,6 +129,7 @@ func InvalidRequest() StatusError {
 	}
 }
 
+// InternalError returns a 500 response for the API
 func InternalError() StatusError {
 	return StatusError{
 		StatusCode: http.StatusInternalServerError,
@@ -164,6 +169,7 @@ func Unauthorized() StatusError {
 	}
 }
 
+// NotFound returns a JSON 404 response for the API
 func NotFound() StatusError {
 	return StatusError{
 		StatusCode: http.StatusNotFound,
@@ -171,6 +177,7 @@ func NotFound() StatusError {
 	}
 }
 
+// Created returns a JSON 201 response for the API
 func Created() StatusError {
 	return StatusError{
 		StatusCode: http.StatusCreated,
@@ -285,18 +292,22 @@ func (e *FieldError) Unwrap() error {
 	return e.Err
 }
 
+// MissingField returns a new error for a missing field
 func MissingField(field string) error {
 	return &FieldError{Field: field, Err: ErrMissingField}
 }
 
+// InvalidField returns a new error for an invalid field
 func InvalidField(field string) error {
 	return &FieldError{Field: field, Err: ErrInvalidField}
 }
 
+// RestrictedField returns a new error for a restricted field
 func RestrictedField(field string) error {
 	return &FieldError{Field: field, Err: ErrRestrictedField}
 }
 
+// ConflictingFields returns a new error for conflicting fields
 func ConflictingFields(fields ...string) error {
 	return &FieldError{Field: strings.Join(fields, ", "), Err: ErrConflictingFields}
 }
