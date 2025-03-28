@@ -35,7 +35,7 @@ func Errorw(err error) *Error {
 
 // Errorf returns a pointer to a new `Error` struct with the specified error message formatted as a string and arguments
 func Errorf(format string, a ...any) *Error {
-	return &Error{err: fmt.Errorf(format, a...)} // nolint: goerr113
+	return &Error{err: fmt.Errorf(format, a...)} // nolint:err113
 }
 
 // Error implements the error interface and gives a high level message about failures

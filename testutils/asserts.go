@@ -10,7 +10,7 @@ import (
 
 // AssertSuccessNotCalled is a success http.Handler that fails if called
 func AssertSuccessNotCalled(t *testing.T) http.Handler {
-	funk := func(w http.ResponseWriter, req *http.Request) {
+	funk := func(_ http.ResponseWriter, _ *http.Request) {
 		assert.Fail(t, "unexpected call to success handler")
 	}
 
@@ -19,7 +19,7 @@ func AssertSuccessNotCalled(t *testing.T) http.Handler {
 
 // AssertFailureNotCalled is a failure http.Handler that fails if called
 func AssertFailureNotCalled(t *testing.T) http.Handler {
-	funk := func(w http.ResponseWriter, req *http.Request) {
+	funk := func(_ http.ResponseWriter, _ *http.Request) {
 		assert.Fail(t, "unexpected call to failure handler")
 	}
 
