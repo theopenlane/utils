@@ -10,8 +10,8 @@ steps:
         key: "lint"
         plugins:
           - docker#v5.12.0:
-              image: "registry.hub.docker.com/golangci/golangci-lint:v1.64.8"
-              command: ["golangci-lint", "run", "-v", "--timeout", "10m", "--config", ".golangci.yaml", "--concurrency", "0"]
+              image: "registry.hub.docker.com/golangci/golangci-lint:v2.0.0"
+              command: ["golangci-lint", "run", "-v", "--config", ".golangci.yaml", "--concurrency", "0"]
               environment:
                 - "GOTOOLCHAIN=auto"
       - label: ":golang: go test"
