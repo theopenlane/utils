@@ -11,7 +11,7 @@ func TestServer() (*http.Client, *http.ServeMux, *httptest.Server) {
 	mux := http.NewServeMux()
 	server := httptest.NewServer(mux)
 	transport := &RewriteTransport{&http.Transport{
-		Proxy: func(req *http.Request) (*url.URL, error) {
+		Proxy: func(_ *http.Request) (*url.URL, error) {
 			return url.Parse(server.URL)
 		},
 	}}
@@ -24,7 +24,7 @@ func TestServer() (*http.Client, *http.ServeMux, *httptest.Server) {
 // error message and code and a client which proxies requests to the server
 func NewErrorServer(message string, code int) (*http.Client, *httptest.Server) {
 	client, mux, server := TestServer()
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
 		http.Error(w, message, code)
 	})
 

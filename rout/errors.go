@@ -234,11 +234,12 @@ func ErrorStatus(err error) int {
 		return http.StatusOK
 	}
 
-	if e, ok := err.(*StatusError); !ok || e.StatusCode < 100 || e.StatusCode >= 600 {
+	e, ok := err.(*StatusError)
+	if !ok || e.StatusCode < 100 || e.StatusCode >= 600 {
 		return http.StatusInternalServerError
-	} else {
-		return e.StatusCode
 	}
+
+	return e.StatusCode
 }
 
 // HTTPErrorResponse constructs a new response for an error or simply returns unsuccessful

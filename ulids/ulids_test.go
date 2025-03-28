@@ -70,7 +70,7 @@ func TestFromTime(t *testing.T) {
 
 	nunique := 0
 
-	vals.Range(func(key, value any) bool {
+	vals.Range(func(_, _ any) bool {
 		nunique++
 		return true
 	})

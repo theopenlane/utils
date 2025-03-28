@@ -20,9 +20,9 @@ func TestAlpha(t *testing.T) {
 
 	// Test creating different random strings at different lengths
 	for i := 0; i < 10000; i++ {
-		len := rand.Intn(512) + 1 //nolint:gosec
-		alpha := keygen.Alpha(len)
-		require.Len(t, alpha, len)
+		length := rand.Intn(512) + 1 //nolint:gosec
+		alpha := keygen.Alpha(length)
+		require.Len(t, alpha, length)
 		require.Regexp(t, regexp.MustCompile(`[a-zA-Z]+`), alpha)
 	}
 
@@ -44,9 +44,9 @@ func TestAlphaNumeric(t *testing.T) {
 
 	// Test creating different random strings at different lengths
 	for i := 0; i < 10000; i++ {
-		len := rand.Intn(512) + 1 //nolint:gosec
-		alpha := keygen.AlphaNumeric(len)
-		require.Len(t, alpha, len)
+		length := rand.Intn(512) + 1 //nolint:gosec
+		alpha := keygen.AlphaNumeric(length)
+		require.Len(t, alpha, length)
 		require.Regexp(t, regexp.MustCompile(`[a-zA-Z0-9]+`), alpha)
 	}
 

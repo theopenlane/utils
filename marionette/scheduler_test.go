@@ -12,7 +12,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	. "github.com/theopenlane/utils/marionette"
+	"github.com/theopenlane/utils/marionette"
 )
 
 func TestScheduler(t *testing.T) {
@@ -27,7 +27,7 @@ func TestScheduler(t *testing.T) {
 		completed uint32
 	)
 
-	out := make(chan Task)
+	out := make(chan marionette.Task)
 
 	wg.Add(1)
 
@@ -42,14 +42,14 @@ func TestScheduler(t *testing.T) {
 	}()
 
 	// Create a scheduler
-	scheduler := NewScheduler(out)
+	scheduler := marionette.NewScheduler(out)
 	require.False(t, scheduler.IsRunning(), "expected the scheduler to not be running when constructed")
 
 	// Schedule a bunch of tasks before running the scheduler including tasks in the
 	// past to ensure that all tasks are run correctly.
 	for i := -5; i < 5; i++ {
 		delay := time.Duration(i * 100 * int(time.Millisecond))
-		scheduler.Delay(delay, TaskFunc(func(ctx context.Context) error { // nolint: errcheck
+		scheduler.Delay(delay, marionette.TaskFunc(func(_ context.Context) error { // nolint: errcheck
 			atomic.AddUint32(&completed, 1)
 			t.Logf("task completed after %s delay", delay)
 
@@ -64,7 +64,7 @@ func TestScheduler(t *testing.T) {
 	// Schedule more tasks, including tasks in the past while scheduler is running.
 	for i := -5; i < 5; i++ {
 		delay := time.Duration(i * 100 * int(time.Millisecond))
-		scheduler.Delay(delay, TaskFunc(func(ctx context.Context) error { // nolint: errcheck
+		scheduler.Delay(delay, marionette.TaskFunc(func(_ context.Context) error { // nolint: errcheck
 			atomic.AddUint32(&completed, 1)
 			t.Logf("task completed after %s delay", delay)
 
@@ -74,7 +74,7 @@ func TestScheduler(t *testing.T) {
 
 	// Schedule a final task far in the future to close the out channel
 	// NOTE: the scheduler cannot be restarted after this!
-	scheduler.Delay(1500*time.Millisecond, TaskFunc(func(ctx context.Context) error { // nolint :errcheck
+	scheduler.Delay(1500*time.Millisecond, marionette.TaskFunc(func(ctx context.Context) error { // nolint :errcheck
 		close(out)
 		t.Log("out channel closed")
 
@@ -90,7 +90,7 @@ func TestScheduler(t *testing.T) {
 func TestSchedulerStop(t *testing.T) {
 	var wg sync.WaitGroup
 
-	scheduler := NewScheduler(nil)
+	scheduler := marionette.NewScheduler(nil)
 	scheduler.Start(&wg)
 
 	// calling scheduler start multiple times should be a no-op
@@ -104,15 +104,15 @@ func TestSchedulerStop(t *testing.T) {
 
 func TestFutures(t *testing.T) {
 	// Create a random time in the future.
-	makeFuture := func() *Future {
-		return &Future{
+	makeFuture := func() *marionette.Future {
+		return &marionette.Future{
 			Time: time.Now().Add(time.Duration(rand.Int63n(8.64e+13))), // nolint: gosec
-			Task: TaskFunc(func(context.Context) error { return nil }),
+			Task: marionette.TaskFunc(func(context.Context) error { return nil }),
 		}
 	}
 
 	t.Run("RandomSort", func(t *testing.T) {
-		futures := make(Futures, 0, 1000)
+		futures := make(marionette.Futures, 0, 1000)
 
 		for i := 0; i < 1000; i++ {
 			futures = futures.Insert(makeFuture())
@@ -161,11 +161,11 @@ func TestFutures(t *testing.T) {
 		require.False(t, slices.IsSorted(index))
 
 		// Create a list of futures from the timestamps.
-		futures := make(Futures, 0)
+		futures := make(marionette.Futures, 0)
 
 		for _, i := range index {
 			ts, _ := time.Parse(time.RFC3339, timestamps[i])
-			futures = futures.Insert(&Future{Time: ts})
+			futures = futures.Insert(&marionette.Future{Time: ts})
 		}
 
 		// Check that the futures are sorted correctly.
@@ -178,7 +178,7 @@ func TestFutures(t *testing.T) {
 	})
 
 	t.Run("GrowAndShrink", func(t *testing.T) {
-		futures := make(Futures, 0)
+		futures := make(marionette.Futures, 0)
 		require.Equal(t, 0, len(futures))
 		require.Equal(t, 0, cap(futures))
 
@@ -215,11 +215,11 @@ func TestFutures(t *testing.T) {
 
 	t.Run("Validate", func(t *testing.T) {
 		testCases := []struct {
-			future *Future
+			future *marionette.Future
 			err    error
 		}{
-			{&Future{Time: time.Time{}}, ErrUnschedulable},
-			{&Future{Time: time.Now()}, nil},
+			{&marionette.Future{Time: time.Time{}}, marionette.ErrUnschedulable},
+			{&marionette.Future{Time: time.Now()}, nil},
 		}
 
 		for i, tc := range testCases {
@@ -230,16 +230,16 @@ func TestFutures(t *testing.T) {
 
 func BenchmarkFutures(b *testing.B) {
 	// Create a random time in the future.
-	makeFuture := func() *Future {
-		return &Future{
+	makeFuture := func() *marionette.Future {
+		return &marionette.Future{
 			Time: time.Now().Add(time.Duration(rand.Int63n(8.64e+13))), // nolint: gosec
-			Task: TaskFunc(func(context.Context) error { return nil }),
+			Task: marionette.TaskFunc(func(context.Context) error { return nil }),
 		}
 	}
 
 	makeBenchmark := func(maxSize int) func(b *testing.B) {
 		return func(b *testing.B) {
-			futures := make(Futures, 0)
+			futures := make(marionette.Futures, 0)
 			futures = futures.Resize()
 
 			b.ReportAllocs()

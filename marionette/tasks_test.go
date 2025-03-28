@@ -15,7 +15,7 @@ type TestTask struct {
 }
 
 // Do method is responsible for executing the task
-func (t *TestTask) Do(ctx context.Context) error {
+func (t *TestTask) Do(_ context.Context) error {
 	t.attempts++
 	if t.attempts < t.failUntil {
 		t.success = false

@@ -8,7 +8,8 @@ import (
 )
 
 var (
-	ErrNoResultsFound error = errors.New("no results found")
+	// ErrNoResultsFound is returned when no results are found in the keyring
+	ErrNoResultsFound = errors.New("no results found")
 )
 
 // QueryKeyring queries the keyring for the first item with the given service and account
