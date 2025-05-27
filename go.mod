@@ -11,7 +11,7 @@ require (
 	github.com/oklog/ulid/v2 v2.1.1
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/ory/dockertest v3.3.5+incompatible
-	github.com/redis/go-redis/v9 v9.8.0
+	github.com/redis/go-redis/v9 v9.9.0
 	github.com/rs/zerolog v1.34.0
 	github.com/stoewer/go-strcase v1.3.0
 	github.com/stretchr/testify v1.10.0
