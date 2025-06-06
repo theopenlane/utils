@@ -4,7 +4,6 @@ go 1.24.1
 
 require (
 	entgo.io/ent v0.14.4
-	github.com/99designs/gqlgen v0.17.74
 	github.com/brianvoe/gofakeit/v7 v7.2.1
 	github.com/cenkalti/backoff/v5 v5.0.2
 	github.com/lib/pq v1.10.9
@@ -17,9 +16,8 @@ require (
 	github.com/stoewer/go-strcase v1.3.0
 	github.com/stretchr/testify v1.10.0
 	github.com/theopenlane/echox v0.2.4
-	github.com/vektah/gqlparser/v2 v2.5.27
 	github.com/zalando/go-keyring v0.2.6
-	golang.org/x/crypto v0.38.0
+	golang.org/x/crypto v0.39.0
 )
 
 require (
@@ -51,7 +49,6 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
-	github.com/sosodev/duration v1.3.1 // indirect
 	golang.org/x/net v0.40.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
