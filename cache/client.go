@@ -14,7 +14,7 @@ type Config struct {
 	// Address is the host:port to connect to redis
 	Address string `json:"address" koanf:"address" default:"localhost:6379"`
 	// Name of the connecting client
-	Name string `json:"name" koanf:"name" default:"openlane"`
+	Name string `json:"name" koanf:"name" default:""`
 	// Username to connect to redis
 	Username string `json:"username" koanf:"username"`
 	// Password, must match the password specified in the server configuration
@@ -53,7 +53,6 @@ type Config struct {
 func New(c Config) *redis.Client {
 	opts := &redis.Options{
 		Addr:            c.Address,
-		ClientName:      c.Name,
 		DB:              c.DB,
 		DialTimeout:     c.DialTimeout,
 		ReadTimeout:     c.ReadTimeout,
@@ -63,6 +62,11 @@ func New(c Config) *redis.Client {
 		MaxIdleConns:    c.MaxIdleConns,
 		MaxActiveConns:  c.MaxActiveConns,
 		DisableIdentity: true,
+	}
+
+	// optional fields
+	if c.Name != "" {
+		opts.ClientName = c.Name
 	}
 
 	if c.Username != "" {
