@@ -6,12 +6,12 @@ require (
 	entgo.io/ent v0.14.4
 	github.com/brianvoe/gofakeit/v7 v7.3.0
 	github.com/lib/pq v1.10.9
-	github.com/mattn/go-sqlite3 v1.14.28
+	github.com/mattn/go-sqlite3 v1.14.29
 	github.com/oklog/ulid/v2 v2.1.1
-	github.com/olekukonko/tablewriter v1.0.7
+	github.com/olekukonko/tablewriter v1.0.8
 	github.com/ory/dockertest v3.3.5+incompatible
 	github.com/redis/go-redis/v9 v9.11.0
-	github.com/stoewer/go-strcase v1.3.0
+	github.com/stoewer/go-strcase v1.3.1
 	github.com/stretchr/testify v1.10.0
 	github.com/theopenlane/echox v0.2.4
 	github.com/zalando/go-keyring v0.2.6
