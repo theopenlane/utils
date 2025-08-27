@@ -12,7 +12,7 @@ require (
 	github.com/ory/dockertest v3.3.5+incompatible
 	github.com/redis/go-redis/v9 v9.11.0
 	github.com/stoewer/go-strcase v1.3.1
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 	github.com/theopenlane/echox v0.2.4
 	github.com/zalando/go-keyring v0.2.6
 	golang.org/x/crypto v0.40.0
