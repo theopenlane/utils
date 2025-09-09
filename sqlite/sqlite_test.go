@@ -43,7 +43,7 @@ func TestOpenMany(t *testing.T) {
 	for i := 0; i < expectedConnections; i++ {
 		db, err := sql.Open("_sqlite3", filepath.Join(tmpdir, fmt.Sprintf("test-%d.db", i+1)))
 		require.NoError(t, err, "could not open connection to database")
-		require.NoError(t, db.Ping(), "could not ping database to establish a connection")
+		require.NoError(t, db.PingContext(context.Background()), "could not ping database to establish a connection")
 		closers[i] = db
 
 		var ok bool

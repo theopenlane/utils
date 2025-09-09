@@ -68,7 +68,7 @@ func (c *Client) Post(ctx context.Context, payload *Payload) error {
 		return fmt.Errorf("slack: marshal json: %w", err)
 	}
 
-	req, err := http.NewRequest("POST", c.WebhookURL, bytes.NewReader(payloadJSON))
+	req, err := http.NewRequest(http.MethodPost, c.WebhookURL, bytes.NewReader(payloadJSON)) //nolint: noctx
 	if err != nil {
 		return fmt.Errorf("slack: create post request: %w", err)
 	}
