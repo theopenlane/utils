@@ -8,7 +8,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/mattn/go-sqlite3 v1.14.32
 	github.com/oklog/ulid/v2 v2.1.1
-	github.com/olekukonko/tablewriter v1.0.9
+	github.com/olekukonko/tablewriter v1.1.0
 	github.com/ory/dockertest v3.3.5+incompatible
 	github.com/redis/go-redis/v9 v9.14.0
 	github.com/stoewer/go-strcase v1.3.1
