@@ -100,3 +100,108 @@ func TestFromOrFunc(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestStringHelpers(t *testing.T) {
+	type OrganizationID string
+	type TraceID string
+
+	ctx := context.Background()
+	ctx = WithString(ctx, OrganizationID("org-123"))
+
+	org, ok := StringFrom[OrganizationID](ctx)
+	if !ok {
+		t.Fatalf("expected OrganizationID to be present")
+	}
+
+	if org != OrganizationID("org-123") {
+		t.Fatalf("unexpected OrganizationID value: %s", org)
+	}
+
+	if _, ok := StringFrom[TraceID](ctx); ok {
+		t.Fatalf("trace id should not exist yet")
+	}
+
+	ctx = WithString(ctx, TraceID("trace-456"))
+
+	if MustStringFrom[TraceID](ctx) != TraceID("trace-456") {
+		t.Fatalf("unexpected TraceID value")
+	}
+
+	if MustStringFrom[OrganizationID](ctx) != OrganizationID("org-123") {
+		t.Fatalf("organization id should remain unchanged")
+	}
+}
+
+func TestMustStringFromPanicsWithoutValue(t *testing.T) {
+	type AccountID string
+
+	defer func() {
+		if recover() == nil {
+			t.Fatalf("MustStringFrom should panic when value missing")
+		}
+	}()
+
+	MustStringFrom[AccountID](context.Background())
+}
+
+func TestStringDefaults(t *testing.T) {
+	type OrganizationID string
+
+	ctx := context.Background()
+
+	if val := StringFromOr(ctx, OrganizationID("fallback")); val != OrganizationID("fallback") {
+		t.Fatalf("expected fallback value, got %s", val)
+	}
+
+	callCount := 0
+	val := StringFromOrFunc(ctx, func() OrganizationID {
+		callCount++
+		return OrganizationID("computed")
+	})
+
+	if val != OrganizationID("computed") {
+		t.Fatalf("expected computed value, got %s", val)
+	}
+
+	if callCount != 1 {
+		t.Fatalf("expected function to be called once, got %d", callCount)
+	}
+
+	ctx = WithString(ctx, OrganizationID("org-abc"))
+
+	if val := StringFromOr(ctx, OrganizationID("fallback")); val != OrganizationID("org-abc") {
+		t.Fatalf("expected stored value, got %s", val)
+	}
+
+	callCount = 0
+	val = StringFromOrFunc(ctx, func() OrganizationID {
+		callCount++
+		return OrganizationID("computed")
+	})
+
+	if val != OrganizationID("org-abc") {
+		t.Fatalf("expected stored value, got %s", val)
+	}
+
+	if callCount != 0 {
+		t.Fatalf("expected function not to run, got %d", callCount)
+	}
+}
+
+func TestHas(t *testing.T) {
+	ctx := context.Background()
+
+	if Has[int](ctx) {
+		t.Fatalf("expected Has to be false for unset value")
+	}
+
+	ctx = With(ctx, 0)
+
+	if !Has[int](ctx) {
+		t.Fatalf("expected Has to be true after With storing zero value")
+	}
+
+	if Has[string](ctx) {
+		t.Fatalf("expected Has to be scoped per type parameter")
+	}
+}
