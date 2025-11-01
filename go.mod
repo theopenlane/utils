@@ -4,9 +4,7 @@ go 1.25.1
 
 require (
 	entgo.io/ent v0.14.5
-	github.com/brianvoe/gofakeit/v7 v7.7.1
 	github.com/lib/pq v1.10.9
-	github.com/mattn/go-sqlite3 v1.14.32
 	github.com/oklog/ulid/v2 v2.1.1
 	github.com/olekukonko/tablewriter v1.1.0
 	github.com/ory/dockertest v3.3.5+incompatible
