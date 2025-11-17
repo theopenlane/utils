@@ -1,6 +1,6 @@
 module github.com/theopenlane/utils
 
-go 1.25.1
+go 1.25.4
 
 require (
 	entgo.io/ent v0.14.5
@@ -15,6 +15,8 @@ require (
 	github.com/zalando/go-keyring v0.2.6
 	golang.org/x/crypto v0.42.0
 )
+
+require github.com/opencontainers/runc v1.2.8 // indirect
 
 require (
 	al.essio.dev/pkg/shellescape v1.5.1 // indirect
@@ -37,11 +39,11 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
+	github.com/moby/sys/user v0.3.0 // indirect
 	github.com/olekukonko/errors v1.1.0 // indirect
 	github.com/olekukonko/ll v0.0.9 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0 // indirect
-	github.com/opencontainers/runc v1.1.14 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect

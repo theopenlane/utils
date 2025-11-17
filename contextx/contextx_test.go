@@ -103,6 +103,7 @@ func TestFromOrFunc(t *testing.T) {
 
 func TestStringHelpers(t *testing.T) {
 	type OrganizationID string
+
 	type TraceID string
 
 	ctx := context.Background()
