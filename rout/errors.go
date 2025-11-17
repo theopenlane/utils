@@ -206,6 +206,7 @@ func ErrorResponse(err interface{}) Reply {
 	}
 
 	rep := Reply{Success: false}
+
 	switch err := err.(type) {
 	case error:
 		rep.Error = err.Error()
@@ -249,6 +250,7 @@ func HTTPErrorResponse(err interface{}) *echo.HTTPError {
 	}
 
 	rep := echo.HTTPError{Code: http.StatusBadRequest}
+
 	switch err := err.(type) {
 	case error:
 		rep.Message = err.Error()

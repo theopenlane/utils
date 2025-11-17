@@ -40,8 +40,8 @@ func IsZero(uid ulid.ULID) bool {
 // this method panics rather than returning an error
 func New() ulid.ULID {
 	ms := ulid.Timestamp(time.Now())
-	uid, err := ulid.New(ms, entropy)
 
+	uid, err := ulid.New(ms, entropy)
 	if err != nil {
 		panic(err)
 	}
@@ -52,8 +52,8 @@ func New() ulid.ULID {
 // FromTime creates a ULID with the specified timestamp
 func FromTime(ts time.Time) ulid.ULID {
 	ms := ulid.Timestamp(ts)
-	uid, err := ulid.New(ms, entropy)
 
+	uid, err := ulid.New(ms, entropy)
 	if err != nil {
 		panic(err)
 	}
