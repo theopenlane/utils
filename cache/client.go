@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/redis/go-redis/v9"
+	"github.com/redis/go-redis/v9/maintnotifications"
 )
 
 // Config for the redis client used to store key-value pairs
@@ -62,6 +63,9 @@ func New(c Config) *redis.Client {
 		MaxIdleConns:    c.MaxIdleConns,
 		MaxActiveConns:  c.MaxActiveConns,
 		DisableIdentity: true,
+		MaintNotificationsConfig: &maintnotifications.Config{ // compatibility with go-redis v9.16.1
+			Mode: maintnotifications.ModeDisabled,
+		},
 	}
 
 	// optional fields
