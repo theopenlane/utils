@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	// TODO:  look at switiching out echo for a more lightweight package
+	// TODO:  look at switching out echo for a more lightweight package
 	echo "github.com/theopenlane/echox"
 )
 
