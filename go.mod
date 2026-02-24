@@ -1,6 +1,6 @@
 module github.com/theopenlane/utils
 
-go 1.25.4
+go 1.25.5
 
 require (
 	entgo.io/ent v0.14.5
@@ -11,9 +11,9 @@ require (
 	github.com/redis/go-redis/v9 v9.17.2
 	github.com/stoewer/go-strcase v1.3.1
 	github.com/stretchr/testify v1.11.1
-	github.com/theopenlane/echox v0.2.4
+	github.com/theopenlane/echox v0.3.0
 	github.com/zalando/go-keyring v0.2.6
-	golang.org/x/crypto v0.46.0
+	golang.org/x/crypto v0.47.0
 )
 
 require github.com/opencontainers/runc v1.2.8 // indirect
@@ -48,8 +48,8 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
-	golang.org/x/net v0.47.0 // indirect
-	golang.org/x/sys v0.39.0 // indirect
+	golang.org/x/net v0.49.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools v2.2.0+incompatible // indirect
 )
