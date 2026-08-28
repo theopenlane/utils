@@ -5,7 +5,7 @@ go 1.26.3
 require (
 	entgo.io/ent v0.14.6
 	github.com/lib/pq v1.12.3
-	github.com/oklog/ulid/v2 v2.1.1
+	github.com/oklog/ulid/v2 v2.1.2
 	github.com/olekukonko/tablewriter v1.1.4
 	github.com/ory/dockertest v3.3.5+incompatible
 	github.com/redis/go-redis/v9 v9.19.0
