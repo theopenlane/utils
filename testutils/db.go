@@ -13,8 +13,8 @@ import (
 	_ "github.com/lib/pq"
 
 	"entgo.io/ent/dialect"
-	"github.com/ory/dockertest"
-	"github.com/ory/dockertest/docker"
+	"github.com/ory/dockertest/v3"
+	"github.com/ory/dockertest/v3/docker"
 )
 
 const (
