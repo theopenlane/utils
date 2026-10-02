@@ -16,7 +16,7 @@ require (
 	golang.org/x/crypto v0.57.0
 )
 
-require github.com/opencontainers/runc v1.2.8 // indirect
+require github.com/opencontainers/runc v1.3.6 // indirect
 
 require (
 	dario.cat/mergo v1.0.0 // indirect
