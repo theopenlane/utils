@@ -147,6 +147,7 @@ func TestKeyWorksWithPointerType(t *testing.T) {
 // and two flags of the same underlying type never collide.
 func TestKeyReplacesEmptyStructBypassPattern(t *testing.T) {
 	type acmeSolverKey struct{}
+
 	type orgFilterKey struct{}
 
 	var (
