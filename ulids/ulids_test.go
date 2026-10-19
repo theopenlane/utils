@@ -33,7 +33,7 @@ func TestNew(t *testing.T) {
 
 	wg.Add(100)
 
-	for i := 0; i < 100; i++ {
+	for range 100 {
 		go func() {
 			defer wg.Done()
 
@@ -55,7 +55,7 @@ func TestFromTime(t *testing.T) {
 
 	wg.Add(100)
 
-	for i := 0; i < 100; i++ {
+	for range 100 {
 		go func() {
 			defer wg.Done()
 

@@ -29,7 +29,7 @@ type VarInfo struct {
 }
 
 // GatherEnvInfo gathers information about the specified struct, including defaults and environment variable names.
-func (c Config) GatherEnvInfo(prefix string, spec interface{}) ([]VarInfo, error) {
+func (c Config) GatherEnvInfo(prefix string, spec any) ([]VarInfo, error) {
 	s := reflect.ValueOf(spec)
 
 	// Ensure the specification is a pointer to a struct

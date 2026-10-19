@@ -24,7 +24,7 @@ func TestIsolatedFromExplicitTypeReflection(t *testing.T) {
 
 	ctx = With(ctx, 10)
 
-	ctx = context.WithValue(ctx, reflect.TypeOf(20), 20)
+	ctx = context.WithValue(ctx, reflect.TypeFor[int](), 20)
 
 	if MustFrom[int](ctx) != 10 {
 		t.FailNow()
