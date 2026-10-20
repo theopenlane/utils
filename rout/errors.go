@@ -192,7 +192,7 @@ type MissingRequiredFieldError struct {
 }
 
 // ErrorResponseWithCode constructs a new response for an error the contains an error code
-func ErrorResponseWithCode(err interface{}, code ErrorCode) Reply {
+func ErrorResponseWithCode(err any, code ErrorCode) Reply {
 	rep := ErrorResponse(err)
 	rep.ErrorCode = code
 
@@ -200,7 +200,7 @@ func ErrorResponseWithCode(err interface{}, code ErrorCode) Reply {
 }
 
 // ErrorResponse constructs a new response for an error or simply returns unsuccessful
-func ErrorResponse(err interface{}) Reply {
+func ErrorResponse(err any) Reply {
 	if err == nil {
 		return unsuccessful
 	}
@@ -244,7 +244,7 @@ func ErrorStatus(err error) int {
 }
 
 // HTTPErrorResponse constructs a new response for an error or simply returns unsuccessful
-func HTTPErrorResponse(err interface{}) *echo.HTTPError {
+func HTTPErrorResponse(err any) *echo.HTTPError {
 	if err == nil {
 		return &httpunsuccessful
 	}

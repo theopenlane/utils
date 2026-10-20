@@ -16,7 +16,7 @@ const (
 // TableOutputWriter is the interface to write out tables
 type TableOutputWriter interface {
 	SetHeaders(headers ...string)
-	AddRow(items ...interface{}) error
+	AddRow(items ...any) error
 	Render() error
 }
 
@@ -64,7 +64,7 @@ func (t *tableoutputwriter) SetHeaders(headers ...string) {
 }
 
 // AddRow appends a new row to our table
-func (t *tableoutputwriter) AddRow(items ...interface{}) error {
+func (t *tableoutputwriter) AddRow(items ...any) error {
 	row := []string{}
 
 	for _, item := range items {

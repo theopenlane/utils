@@ -29,11 +29,11 @@ type VarInfo struct {
 }
 
 // GatherEnvInfo gathers information about the specified struct, including defaults and environment variable names.
-func (c Config) GatherEnvInfo(prefix string, spec interface{}) ([]VarInfo, error) {
+func (c Config) GatherEnvInfo(prefix string, spec any) ([]VarInfo, error) {
 	s := reflect.ValueOf(spec)
 
 	// Ensure the specification is a pointer to a struct
-	if s.Kind() != reflect.Ptr {
+	if s.Kind() != reflect.Pointer {
 		return nil, ErrInvalidSpecification
 	}
 
@@ -56,7 +56,7 @@ func (c Config) GatherEnvInfo(prefix string, spec interface{}) ([]VarInfo, error
 			continue
 		}
 
-		for f.Kind() == reflect.Ptr {
+		for f.Kind() == reflect.Pointer {
 			if f.IsNil() {
 				if f.Type().Elem().Kind() != reflect.Struct {
 					// nil pointer to a non-struct: leave it alone

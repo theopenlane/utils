@@ -12,17 +12,15 @@ Utilities for working within the openlane ecosystem, high level overview of pack
 - cache: redis client interface
 - cli: cli helper utilities for printing rows, tables
 - contextx: The contextx package provides helper functions for managing context values, particularly for request-scoped data. It uses generics to simplify the handling of context keys.
-- dumper: The dumper package is a utility for dumping HTTP request contents, useful for debugging and logging purposes.
 - envparse: struct default parsing utility
 - gravatar: create sweet robot avatars based on your email
+- jsonx: helpers for working with JSON, including decoding, round-tripping, deep merging `json.RawMessage` objects, and generating, validating, and conforming documents against JSON schemas
 - keygen: The keygen package provides utilities for generating and validating keys. It includes a key generator that can generate keys of any length and a key validator that can validate keys of any length.
 - keyring: package keyring allows for quick and easy access to the system keyring service
-- marionette: The marionette package is a task manager with scheduling, backoff, and future scheduling capabilities. It is designed as a temporary solution until an external state management system is implemented.
+- mapx: generic helpers for creating, cloning, merging, and querying maps and set-maps, including dotted-path lookups into decoded JSON
 - passwd: The passwd package provides cryptographic utilities for handling passwords.
 - rout: rout is a semi-centralized method of handling and surfacing user facing errors
 - slack: very minimal slack functions for sending messages
-- slice: a nice big juicy slice of functions for working with slices
-- sqlite: sqlite client interface
 - testutils: test utilities!
 - ulids: The ulids package is a lightweight wrapper around the github.com/oklog/ulid package. It provides common functionality such as checking if a ULID is null or zero and includes a process-global, cryptographically random, monotonic, and thread-safe ULID generation mechanism.
 

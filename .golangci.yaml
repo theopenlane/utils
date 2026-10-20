@@ -1,6 +1,7 @@
 version: "2"
 run:
   allow-serial-runners: true
+  tests: false
 linters:
   enable:
     - bodyclose

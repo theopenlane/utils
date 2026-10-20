@@ -138,6 +138,7 @@ func GetPostgresDockerTest(image string, expiry time.Duration, maxConn int) (*Te
 		if err != nil {
 			return err
 		}
+
 		return db.PingContext(context.Background())
 	}); err != nil {
 		log.Fatalf("unable to connect to database: %s", err)

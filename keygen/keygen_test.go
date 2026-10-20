@@ -19,7 +19,7 @@ func TestAlpha(t *testing.T) {
 	}
 
 	// Test creating different random strings at different lengths
-	for i := 0; i < 10000; i++ {
+	for range 10000 {
 		length := rand.Intn(512) + 1 //nolint:gosec
 		alpha := keygen.Alpha(length)
 		require.Len(t, alpha, length)
@@ -28,7 +28,7 @@ func TestAlpha(t *testing.T) {
 
 	vals := make(map[string]struct{})
 
-	for i := 0; i < 10000; i++ {
+	for range 10000 {
 		val := keygen.Alpha(16)
 		vals[val] = struct{}{}
 	}
@@ -43,7 +43,7 @@ func TestAlphaNumeric(t *testing.T) {
 	}
 
 	// Test creating different random strings at different lengths
-	for i := 0; i < 10000; i++ {
+	for range 10000 {
 		length := rand.Intn(512) + 1 //nolint:gosec
 		alpha := keygen.AlphaNumeric(length)
 		require.Len(t, alpha, length)
@@ -52,7 +52,7 @@ func TestAlphaNumeric(t *testing.T) {
 
 	vals := make(map[string]struct{})
 
-	for i := 0; i < 10000; i++ {
+	for range 10000 {
 		val := keygen.AlphaNumeric(16)
 		vals[val] = struct{}{}
 	}
@@ -81,7 +81,7 @@ func TestCryptoRandInt(t *testing.T) {
 
 	nums := make(map[uint64]struct{})
 
-	for i := 0; i < 10000; i++ {
+	for range 10000 {
 		val := keygen.CryptoRandInt()
 		nums[val] = struct{}{}
 	}
