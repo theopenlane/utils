@@ -2,8 +2,37 @@ package jsonx
 
 import (
 	"encoding/json"
+	"strings"
 	"testing"
 )
+
+type closedSchemaFixture struct {
+	Name string `json:"name"`
+}
+
+func TestAllowAdditionalProperties(t *testing.T) {
+	t.Parallel()
+
+	schema := SchemaFrom[closedSchemaFixture]()
+	if !strings.Contains(string(schema), `"additionalProperties":false`) {
+		t.Fatalf("reflected schema should close additional properties, got %s", schema)
+	}
+
+	opened := AllowAdditionalProperties(schema)
+	if !strings.Contains(string(opened), `"additionalProperties":true`) {
+		t.Fatalf("jsonx.AllowAdditionalProperties() should open additional properties, got %s", opened)
+	}
+}
+
+func TestAllowAdditionalPropertiesKeepsUnreadableSchema(t *testing.T) {
+	t.Parallel()
+
+	for _, schema := range []json.RawMessage{json.RawMessage(`not json`), json.RawMessage(`{"$ref":"#/$defs/Missing"}`)} {
+		if got := AllowAdditionalProperties(schema); string(got) != string(schema) {
+			t.Fatalf("jsonx.AllowAdditionalProperties(%s) = %s, want it unchanged", schema, got)
+		}
+	}
+}
 
 func TestSchemaID(t *testing.T) {
 	t.Parallel()
