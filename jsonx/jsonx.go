@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"reflect"
 
 	"github.com/wundergraph/astjson"
 )
@@ -133,17 +134,22 @@ func IsEmptyRawMessage(raw json.RawMessage) bool {
 	return len(trimmed) == 0 || bytes.Equal(trimmed, []byte("null"))
 }
 
-// IsEmptyValue reports whether a decoded JSON value is null, an empty string, an empty list or an empty object
+// IsEmptyValue reports whether a value encodes to JSON null, an empty string, an empty list or an empty object,
+// zero numbers and false are values and are not empty
 func IsEmptyValue(value any) bool {
-	switch v := value.(type) {
-	case nil:
+	if value == nil {
 		return true
-	case string:
-		return v == ""
-	case []any:
-		return len(v) == 0
-	case map[string]any:
-		return len(v) == 0
+	}
+
+	v := reflect.ValueOf(value)
+
+	switch v.Kind() {
+	case reflect.Pointer, reflect.Interface:
+		return v.IsNil()
+	case reflect.String, reflect.Array:
+		return v.Len() == 0
+	case reflect.Slice, reflect.Map:
+		return v.IsNil() || v.Len() == 0
 	default:
 		return false
 	}

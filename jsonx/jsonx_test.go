@@ -467,6 +467,15 @@ func TestIsEmptyValue(t *testing.T) {
 		{name: "object", value: map[string]any{"a": 1}},
 		{name: "zero number", value: float64(0)},
 		{name: "false", value: false},
+		{name: "nil list", value: []any(nil), empty: true},
+		{name: "empty typed list", value: []string{}, empty: true},
+		{name: "empty typed map", value: map[string]string{}, empty: true},
+		{name: "nil pointer", value: (*sample)(nil), empty: true},
+		{name: "empty named string", value: json.Number(""), empty: true},
+		{name: "typed list", value: []string{"a"}},
+		{name: "typed map", value: map[string]int{"a": 0}},
+		{name: "pointer", value: &sample{}},
+		{name: "struct", value: sample{}},
 	}
 
 	for _, tc := range testCases {
