@@ -475,6 +475,9 @@ func TestIsEmptyValue(t *testing.T) {
 		{name: "typed list", value: []string{"a"}},
 		{name: "typed map", value: map[string]int{"a": 0}},
 		{name: "pointer", value: &sample{}},
+		{name: "pointer to empty string", value: new(string), empty: true},
+		{name: "pointer to empty list", value: &[]string{}, empty: true},
+		{name: "pointer to list", value: &[]string{"a"}},
 		{name: "struct", value: sample{}},
 	}
 
