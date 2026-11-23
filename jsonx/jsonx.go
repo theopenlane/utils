@@ -133,6 +133,22 @@ func IsEmptyRawMessage(raw json.RawMessage) bool {
 	return len(trimmed) == 0 || bytes.Equal(trimmed, []byte("null"))
 }
 
+// IsEmptyValue reports whether a decoded JSON value is null, an empty string, an empty list or an empty object
+func IsEmptyValue(value any) bool {
+	switch v := value.(type) {
+	case nil:
+		return true
+	case string:
+		return v == ""
+	case []any:
+		return len(v) == 0
+	case map[string]any:
+		return len(v) == 0
+	default:
+		return false
+	}
+}
+
 // UnmarshalIfPresent unmarshals raw JSON when it is non-empty
 func UnmarshalIfPresent(raw json.RawMessage, output any) error {
 	if IsEmptyRawMessage(raw) {

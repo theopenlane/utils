@@ -451,3 +451,29 @@ func TestDeepMerge(t *testing.T) {
 		}
 	})
 }
+
+func TestIsEmptyValue(t *testing.T) {
+	testCases := []struct {
+		name  string
+		value any
+		empty bool
+	}{
+		{name: "nil", value: nil, empty: true},
+		{name: "empty string", value: "", empty: true},
+		{name: "empty list", value: []any{}, empty: true},
+		{name: "empty object", value: map[string]any{}, empty: true},
+		{name: "string", value: "a"},
+		{name: "list", value: []any{"a"}},
+		{name: "object", value: map[string]any{"a": 1}},
+		{name: "zero number", value: float64(0)},
+		{name: "false", value: false},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if got := IsEmptyValue(tc.value); got != tc.empty {
+				t.Fatalf("expected %v, got %v", tc.empty, got)
+			}
+		})
+	}
+}
